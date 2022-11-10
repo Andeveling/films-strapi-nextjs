@@ -1,15 +1,17 @@
-import type { GetStaticProps } from 'next'
-import type { SWRConfiguration } from 'swr'
-import { FilmsResponseI } from 'src/models'
 import Films from '@components/Films'
 import Layout from '@components/Layout'
-import useSWR from 'swr'
-import { fetcher } from 'lib/api'
 import { server } from 'config'
+import { fetcher } from 'lib/api'
+import { useFetchUser } from 'lib/authContext'
+import type { GetStaticProps } from 'next'
 import { useState } from 'react'
+import { FilmsResponseI } from 'src/models'
+import type { SWRConfiguration } from 'swr'
+import useSWR from 'swr'
 
 export default function FilmsList({ films }: { films: FilmsResponseI }) {
   const [pageIndex, setPageIndex] = useState(1)
+  const user = useFetchUser()
 
   const configSWR: SWRConfiguration = {
     fallbackData: films,
@@ -21,7 +23,7 @@ export default function FilmsList({ films }: { films: FilmsResponseI }) {
     configSWR,
   )
   return (
-    <Layout>
+    <Layout value={user}>
       <h1 className='text-5xl md:text-6xl font-extrabold leading-tight mb-4 '>
         <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400 py-2'>Films</span>
       </h1>
@@ -53,7 +55,6 @@ export default function FilmsList({ films }: { films: FilmsResponseI }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await fetcher(`${server}/films?pagination[page]=1&pagination[pageSize]=2`)
-
   return {
     props: {
       films: data,

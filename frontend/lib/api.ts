@@ -1,4 +1,4 @@
-export async function fetcher(url: RequestInfo | URL, options = {}) {
+export async function fetcher(url: URL | RequestInfo, options?: RequestInit) {
   let response
   if (!options) {
     response = await fetch(url)

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import strapiLogo from '@public/assets/img/Strapi.full.logo.dark.jpg'
+import Login from './Login'
 
 const Nav = () => {
   return (
@@ -23,7 +24,7 @@ const Nav = () => {
       <ul
         className='
         pt-4
-        text-xl font-bold text-gray-700
+        text-base font-bold text-gray-700
         flex
         mr-10
         md:mr-20
@@ -40,6 +41,7 @@ const Nav = () => {
             Films
           </Link>
         </li>
+        <Login />
       </ul>
     </nav>
   )

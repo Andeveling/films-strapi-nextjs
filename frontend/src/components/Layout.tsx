@@ -1,10 +1,10 @@
+import { AuthContextProvider, AuthPropsI } from 'lib/authContext'
 import Head from 'next/head'
-import { Fragment, PropsWithChildren } from 'react'
 import Nav from './Nav'
 
-const Layout = ({ children }: PropsWithChildren) => {
+const Layout = ({ value: { user, loading }, children }: AuthPropsI) => {
   return (
-    <Fragment>
+    <AuthContextProvider value={{ user, loading }}>
       <Head>
         <title>Film database</title>
       </Head>
@@ -26,7 +26,7 @@ const Layout = ({ children }: PropsWithChildren) => {
           <div className='text-2xl font-medium'>{children}</div>
         </div>
       </main>
-    </Fragment>
+    </AuthContextProvider>
   )
 }
 export default Layout
