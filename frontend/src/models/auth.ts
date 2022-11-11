@@ -5,6 +5,7 @@ export interface AuthResponseI {
 
 export interface UserI {
   id: string
+  avatar: string
   username: string
   email: string
   provider: string

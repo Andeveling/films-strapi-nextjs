@@ -1,8 +1,14 @@
+import { ReviewI, ReviewsResponseI } from './reviews'
+
 export interface FilmsResponseI {
   data: FilmI[]
   meta: Meta
 }
 export interface FilmResponseI {
+  error: {
+    status: number
+    message: string
+  }
   data: FilmI
   meta: Meta
 }
@@ -24,6 +30,7 @@ export interface FilmI {
 }
 
 export interface Attributes {
+  reviews: ReviewsResponseI
   title: string
   release: Date
   director: string

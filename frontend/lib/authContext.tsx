@@ -22,7 +22,7 @@ export const AuthContext = createContext<AuthI>(auth)
 
 export const AuthContextProvider = ({ value, children }: AuthPropsI) => {
   const { user } = value
-  console.log(value)
+
   useEffect(() => {
     if (!userState && user) {
       userState = user

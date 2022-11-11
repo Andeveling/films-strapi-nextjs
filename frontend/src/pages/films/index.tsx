@@ -18,7 +18,7 @@ export default function FilmsList({ films }: { films: FilmsResponseI }) {
   }
 
   const { data } = useSWR<FilmsResponseI>(
-    `http://localhost:1337/api/films?pagination[page]=${pageIndex}&pagination[pageSize]=2`,
+    `${server}/films?pagination[page]=${pageIndex}&pagination[pageSize]=4`,
     fetcher,
     configSWR,
   )
@@ -30,7 +30,7 @@ export default function FilmsList({ films }: { films: FilmsResponseI }) {
       <Films films={data as FilmsResponseI} />
       <div className='space-x-2 space-y-2 flex justify-between'>
         <button
-          className={`md:p-2 rounded py-2  p2 ${
+          className={`md:p-1 rounded py-1  p1 ${
             pageIndex === 1 ? 'bg-gray-300  text-black' : 'bg-blue-400 text-white'
           }`}
           disabled={pageIndex === 1}
@@ -39,7 +39,7 @@ export default function FilmsList({ films }: { films: FilmsResponseI }) {
         </button>
         <span>{`${pageIndex} of ${data && data.meta.pagination.pageCount}`}</span>
         <button
-          className={`md:p-2 rounded py-2  p2 ${
+          className={`md:p-1 rounded py-1  p1 ${
             pageIndex === (data && data.meta.pagination.pageCount)
               ? 'bg-gray-300  text-black'
               : 'bg-blue-400 text-white'

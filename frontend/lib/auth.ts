@@ -3,6 +3,8 @@ import Cookies from 'js-cookie'
 import Router from 'next/router'
 import { AuthResponseI } from 'src/models'
 import axios from 'axios'
+import { GetServerSideProps, GetStaticProps } from 'next'
+import { IncomingMessage } from 'http'
 
 export const setToken = (data: AuthResponseI) => {
   if (typeof window === 'undefined') {
@@ -38,7 +40,7 @@ export const getUserFromLocalCookie = () => {
         },
       })
       .then((response) => response.data.username)
-      .catch((error) => console.error(error))
+      .catch((error) => console.error('algo salio mal', error))
   } else {
     return
   }
@@ -54,7 +56,7 @@ export const getIdFromLocalCookie = () => {
         },
       })
       .then((response) => response.data.id)
-      .catch((error) => console.error(error))
+      .catch((error) => console.error('algo salio mal', error))
   } else {
     return
   }
@@ -64,7 +66,7 @@ export const getTokenFromLocalCookie = () => {
   return Cookies.get('jwt')
 }
 
-export const getTokenFromServerCookie = (req: { headers: { cookie: string } }) => {
+export const getTokenFromServerCookie = (req: IncomingMessage & { cookies: Partial<{ [key: string]: string }> }) => {
   if (!req.headers.cookie || '') {
     return undefined
   }
