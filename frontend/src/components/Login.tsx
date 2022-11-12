@@ -88,6 +88,7 @@ const Login = () => {
                   type='text'
                   name='identifier'
                   placeholder='Username'
+                  onChange={handleChange}
                   className='md:p-2 form-input py-2 px-4 rounded-xl mx-2'
                   required
                 />
